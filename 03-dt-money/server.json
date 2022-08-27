@@ -13,7 +13,7 @@
       "description": "Hamburger",
       "type": "outcome",
       "category": "Alimentação",
-      "price": 35.00,
+      "price": 35,
       "createdAt": "2022-08-27T14:50:03.201Z"
     },
     {
@@ -23,6 +23,30 @@
       "category": "Educação",
       "price": 1774,
       "createdAt": "2022-08-27T16:50:03.201Z"
+    },
+    {
+      "description": "Desenvolvimento de App",
+      "price": 10000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2022-08-27T19:12:33.667Z",
+      "id": 4
+    },
+    {
+      "description": "Pastel",
+      "price": 5,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2022-08-27T19:30:24.782Z",
+      "id": 5
+    },
+    {
+      "description": "Pastel (2x) e Caldo de Cana",
+      "price": 20,
+      "category": "Aliementação",
+      "type": "outcome",
+      "createdAt": "2022-08-27T19:31:17.231Z",
+      "id": 6
     }
   ]
 }
