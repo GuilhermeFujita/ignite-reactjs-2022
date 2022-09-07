@@ -1,3 +1,14 @@
+import { styled } from '../styles';
+
+const Button = styled('button', {
+  background: '$rocketseat',
+  borderRadius: 8,
+});
+
 export default function Home() {
-  return <h1>Hello World</h1>;
+  return (
+    <>
+      <Button>Hello World</Button>
+    </>
+  );
 }
