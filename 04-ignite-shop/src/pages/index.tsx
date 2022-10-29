@@ -11,9 +11,13 @@ import "keen-slider/keen-slider.min.css";
 
 import { stripe } from "../lib/stripe";
 import Stripe from "stripe";
+import { CartButton } from "../components/CartButton";
+import { useCart } from "../hooks/useCart";
+import { IProduct } from "../contexts/CartContext";
+import { MouseEvent } from "react";
 
 interface HomeProps {
-  products: Product[];
+  products: IProduct[];
 }
 
 interface Product {
@@ -30,6 +34,16 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     },
   });
+
+  const { addToCart, checkIfItemAlreadyExists } = useCart();
+
+  function handleAddToCart(
+    event: MouseEvent<HTMLButtonElement>,
+    product: IProduct
+  ) {
+    event.preventDefault();
+    addToCart(product);
+  }
 
   return (
     <>
@@ -49,8 +63,16 @@ export default function Home({ products }: HomeProps) {
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+                  <CartButton
+                    color="green"
+                    size="large"
+                    disabled={checkIfItemAlreadyExists(product.id)}
+                    onClick={(event) => handleAddToCart(event, product)}
+                  />
                 </footer>
               </Product>
             </Link>
@@ -77,6 +99,8 @@ export const getStaticProps: GetStaticProps = async () => {
         style: "currency",
         currency: "BRL",
       }).format(price.unit_amount / 100),
+      numberPrice: price.unit_amount / 100,
+      defaultPriceId: price.id,
     };
   });
 
