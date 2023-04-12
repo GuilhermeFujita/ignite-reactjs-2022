@@ -32,8 +32,6 @@ export default function ConnectCalendar() {
           </Button>
         </ConnectItem>
 
-        <Text>{JSON.stringify(session.data, null, 2)}</Text>
-
         <Button type='submit'>
           Próximo passo
           <ArrowRight />
