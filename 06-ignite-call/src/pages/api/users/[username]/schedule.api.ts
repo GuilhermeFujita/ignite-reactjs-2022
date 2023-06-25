@@ -1,9 +1,9 @@
-import { prisma } from '@/lib/prisma';
-import { NextApiRequest, NextApiResponse } from 'next';
 import dayjs from 'dayjs';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
+import { prisma } from '../../../../lib/prisma';
 
-export default async function handle(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -27,7 +27,7 @@ export default async function handle(
     name: z.string(),
     email: z.string().email(),
     observations: z.string().nullable(),
-    date: z.string(),
+    date: z.string().datetime(),
   });
 
   const { name, email, observations, date } = createSchedulingBody.parse(
@@ -38,7 +38,7 @@ export default async function handle(
 
   if (schedulingDate.isBefore(new Date())) {
     return res.status(400).json({
-      message: 'Date is in the past',
+      message: 'Date is in the past.',
     });
   }
 
@@ -51,7 +51,7 @@ export default async function handle(
 
   if (conflictingScheduling) {
     return res.status(400).json({
-      message: 'There is another scheduling in the same time',
+      message: 'There is another scheduling at at the same time.',
     });
   }
 
