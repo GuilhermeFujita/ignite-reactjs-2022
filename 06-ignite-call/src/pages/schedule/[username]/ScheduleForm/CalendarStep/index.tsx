@@ -17,7 +17,11 @@ interface Availability {
   availableTimes: number[];
 }
 
-export function CalendarStep() {
+interface CalendarStepProps {
+  onSelectDateTime: (date: Date) => void;
+}
+
+export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const router = useRouter();
@@ -50,6 +54,15 @@ export function CalendarStep() {
     }
   );
 
+  function handleSelectedTime(hour: number) {
+    const dateWithTime = dayjs(selectedDate)
+      .set('hour', hour)
+      .startOf('hour')
+      .toDate();
+
+    onSelectDateTime(dateWithTime);
+  }
+
   return (
     <Container isTimePickerOpen={isDateSelected}>
       <Calendar selectedDate={selectedDate} onDateSelected={setSelectedDate} />
@@ -65,23 +78,13 @@ export function CalendarStep() {
               return (
                 <TimePickerItem
                   key={hour}
+                  onClick={() => handleSelectedTime(hour)}
                   disabled={!availability.availableTimes.includes(hour)}
                 >
                   {String(hour).padStart(2, '0')}:00
                 </TimePickerItem>
               );
             })}
-            <TimePickerItem>08:00h</TimePickerItem>
-            <TimePickerItem>09:00h</TimePickerItem>
-            <TimePickerItem>10:00h</TimePickerItem>
-            <TimePickerItem>11:00h</TimePickerItem>
-            <TimePickerItem>12:00h</TimePickerItem>
-            <TimePickerItem>13:00h</TimePickerItem>
-            <TimePickerItem>14:00h</TimePickerItem>
-            <TimePickerItem>15:00h</TimePickerItem>
-            <TimePickerItem>16:00h</TimePickerItem>
-            <TimePickerItem>17:00h</TimePickerItem>
-            <TimePickerItem>18:00h</TimePickerItem>
           </TimePickerList>
         </TimePicker>
       )}
