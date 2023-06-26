@@ -1,14 +1,14 @@
+import './styles/global.css';
+
 import { Provider } from 'react-redux';
 
 import { store } from './store';
-import { TodoList } from './components/TodoList';
-import { AddTodo } from './components/AddTodo';
+import { Player } from './pages/Player';
 
 export function App() {
   return (
     <Provider store={store}>
-      <TodoList />
-      <AddTodo />
+      <Player />
     </Provider>
   );
 }
