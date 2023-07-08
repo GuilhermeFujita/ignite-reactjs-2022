@@ -5,7 +5,12 @@ import { Module } from '../components/Module';
 import { useEffect } from 'react';
 import { useCurrentLesson, useStore } from '../zustand-store';
 export function Player() {
-  const { course, load } = useStore();
+  const { course, load } = useStore((store) => {
+    return {
+      course: store.course,
+      load: store.load,
+    };
+  });
 
   const { currentLesson } = useCurrentLesson();
 
