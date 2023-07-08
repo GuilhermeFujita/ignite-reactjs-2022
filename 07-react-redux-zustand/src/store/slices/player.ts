@@ -32,11 +32,11 @@ const initialState: PlayerState = {
 };
 
 export const loadCourse = createAsyncThunk(
-  'start', // Nome da action assincrona
+  'player/load', // Nome da action assincrona
   async function () {
-    api.get('/courses/1').then((response) => {
-      console.log(response.data);
-    });
+    const response = await api.get('/courses/1');
+
+    return response.data;
   }
 );
 
