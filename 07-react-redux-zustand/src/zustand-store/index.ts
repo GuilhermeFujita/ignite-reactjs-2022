@@ -22,6 +22,8 @@ export interface PlayerState {
   currentModuleIndex: number;
   currentLessonIndex: number;
   isLoading: boolean;
+  play: (moduleAndLessonIndex: [number, number]) => void;
+  next: () => void;
 }
 
 //get => Busca informações
