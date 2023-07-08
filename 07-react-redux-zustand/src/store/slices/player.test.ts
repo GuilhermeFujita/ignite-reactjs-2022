@@ -33,6 +33,7 @@ const exampleState: PlayerState = {
   },
   currentModuleIndex: 0,
   currentLessonIndex: 0,
+  isLoading: false,
 };
 describe('player slice', () => {
   it('should be able to play', () => {
