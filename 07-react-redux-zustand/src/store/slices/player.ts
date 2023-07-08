@@ -68,6 +68,13 @@ const playerSlice = createSlice({
       }
     },
   },
+  extraReducers(builder) {
+    //Serve para pegar os dados do thunk e adicionar no state
+    //No caso abaixo a função será executada quando a request do thunk loadCourse for bem sucedida
+    builder.addCase(loadCourse.fulfilled, (state, action) => {
+      state.course = action.payload;
+    });
+  },
 });
 
 export const player = playerSlice.reducer;
