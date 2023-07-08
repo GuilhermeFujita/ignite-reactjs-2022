@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { useAppSelector } from '..';
+import { api } from '../../lib/axios';
 
 interface Module {
   id: number;
@@ -29,6 +30,15 @@ const initialState: PlayerState = {
   currentModuleIndex: 0,
   currentLessonIndex: 0,
 };
+
+export const loadCourse = createAsyncThunk(
+  'start', // Nome da action assincrona
+  async function () {
+    api.get('/courses/1').then((response) => {
+      console.log(response.data);
+    });
+  }
+);
 
 const playerSlice = createSlice({
   name: 'player',
